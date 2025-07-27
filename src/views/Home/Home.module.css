@@ -1,0 +1,290 @@
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin: 0;
+    font-weight: 400;
+}
+
+.typeSelector {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.btnGroup {
+    display: flex;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+}
+
+.typeBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    min-width: 140px;
+    justify-content: center;
+}
+
+.typeBtn:hover {
+    color: #495057;
+    background: rgba(0, 123, 255, 0.05);
+}
+
+.typeBtn.active {
+    background: #007bff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.typeBtn i {
+    font-size: 1.1rem;
+}
+
+.generateSection {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.btnGenerate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    min-width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btnGenerate:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+}
+
+.btnGenerate:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.btnGenerate.generating {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.btnGenerate i {
+    font-size: 1.2rem;
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translateY(-2px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-2px) scale(1.02);
+    }
+}
+
+.resultSection {
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultBox {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #28a745;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(40, 167, 69, 0.15);
+    animation: slideInUp 0.6s ease-out, glow 2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.resultBox::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: shine 2s ease-in-out;
+}
+
+.resultLabel {
+    font-size: 1rem;
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.resultValue {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    letter-spacing: -0.02em;
+    word-break: break-all;
+    line-height: 1.2;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 8px 24px rgba(40, 167, 69, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 8px 32px rgba(40, 167, 69, 0.25);
+    }
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem 1rem;
+        gap: 2rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .typeBtn {
+        min-width: 120px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    .btnGenerate {
+        min-width: 180px;
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+
+    .resultValue {
+        font-size: 2rem;
+    }
+
+    .resultBox {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .btnGroup {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .typeBtn {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .resultValue {
+        font-size: 1.8rem;
+    }
+}

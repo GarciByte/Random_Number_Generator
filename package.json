@@ -1,0 +1,84 @@
+{
+  "name": "random_number_generator",
+  "version": "1.0.0",
+  "description": "Una aplicación para generar números aleatorios",
+  "author": "GarciByte <admarting1@gmail.com>",
+  "private": true,
+  "main": "dist-electron/main.js",
+  "build": {
+    "productName": "Random Number Generator",
+    "appId": "com.garcibyte.randomgenerator",
+    "directories": {
+      "output": "release",
+      "buildResources": "public"
+    },
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "node_modules/**",
+      {
+        "from": "electron/preload.cjs",
+        "to": "dist-electron/preload.cjs"
+      },
+      "package.json"
+    ],
+    "asarUnpack": [
+      "dist-electron/preload.cjs"
+    ],
+    "win": {
+      "icon": "public/icon.ico",
+      "target": "nsis",
+      "artifactName": "Random Number Generator Setup Latest.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "public/icon.ico",
+      "uninstallerIcon": "public/icon.ico"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "electron:start": "tsc -p tsconfig.electron.json && electron ./dist-electron/main.js",
+    "preelectron:dev": "cpx \"electron/preload.cjs\" \"dist-electron/\"",
+    "electron:dev": "cross-env NODE_ENV=DEV concurrently \"vite\" \"npm:electron:start\"",
+    "create-view": "ts-node scripts/create-view.ts",
+    "build-renderer": "vite build",
+    "build-electron": "tsc -p tsconfig.electron.json && cpx \"electron/preload.cjs\" \"dist-electron/\"",
+    "build": "npm run build-renderer && npm run build-electron",
+    "clean": "rimraf dist dist-electron release",
+    "make": "npm run build && electron-builder",
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "preview": "vite preview",
+    "postinstall": "electron-rebuild -f -w better-sqlite3"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^6.1.0",
+    "@tsconfig/svelte": "^5.0.4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/bootstrap": "^5.2.10",
+    "@types/node": "^24.1.0",
+    "@types/node-fetch": "^2.6.12",
+    "concurrently": "^9.2.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^7.0.3",
+    "electron": "^37.2.4",
+    "electron-builder": "^26.0.12",
+    "electron-rebuild": "^3.2.9",
+    "prettier": "^3.6.2",
+    "svelte": "^5.36.16",
+    "svelte-check": "^4.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.6"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "bindings": "^1.5.0",
+    "bootstrap": "^5.3.7",
+    "bootstrap-icons": "^1.13.1",
+    "node-fetch": "^2.7.0",
+    "svelte-spa-router": "^4.0.1"
+  }
+}
