@@ -42,7 +42,7 @@ vite.config.ts.tsbuildinfo
 # TypeScript build info
 *.tsbuildinfo
 
-# Electron packaging output (ej. si usas electron-builder)
+# Electron packaging output
 release/
 out/
 *.exe
@@ -55,7 +55,7 @@ Thumbs.db
 ehthumbs.db
 desktop.ini
 
-# Test coverage (si usas testing)
+# Test coverage
 coverage/
 
 # macOS
