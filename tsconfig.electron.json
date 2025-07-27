@@ -3,6 +3,7 @@
     "target": "ES2022",
     "module": "CommonJS",
     "outDir": "./dist-electron",
+    "allowJs": true,
     "rootDir": "./electron",
     "strict": true,
     "moduleResolution": "node",
@@ -11,5 +12,5 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["electron/main.ts", "electron/database.ts"]
+  "include": ["electron/main.ts", "electron/database.ts", "electron/generate.worker.js"]
 }

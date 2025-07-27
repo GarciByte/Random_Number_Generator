@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
-    "notes": "- Versión inicial de la aplicación",
+    "version": "1.0.1",
+    "notes": "- Mejorada la fluidez al generar números\n- Arreglos menores para mejorar la experiencia del usuario.",
     "setupUrl": "https://github.com/GarciByte/Random_Number_Generator/releases/latest/download/Random.Number.Generator.Setup.Latest.exe"
 }

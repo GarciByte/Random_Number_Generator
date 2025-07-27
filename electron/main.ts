@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { insertHistory, getHistory, clearHistory } from './database';
 import fetch from 'node-fetch';
+import { Worker } from 'worker_threads';
 
 // Generación de números
 const PRACTICAL_LIMIT = 1_000_000;
@@ -43,16 +44,24 @@ ipcMain.handle('generate-numbers', (_event, settings) => {
         );
     }
 
-    const result: number[] = [];
-    while (result.length < amount) {
-        const n = possible[Math.floor(Math.random() * possible.length)];
-        if (allowRepeats || !result.includes(n)) {
-            result.push(n);
-        }
-    }
+    return new Promise<number[]>((resolve, reject) => {
+        const worker = new Worker(path.join(__dirname, 'generate.worker.js'), {
+            workerData: null
+        });
 
-    insertHistory(result);
-    return result;
+        worker.once('message', (result: number[]) => {
+            insertHistory(result);
+            resolve(result);
+            worker.terminate();
+        });
+
+        worker.once('error', err => {
+            reject(err);
+            worker.terminate();
+        });
+
+        worker.postMessage({ min, max, allowRepeats, mode, amount });
+    });
 });
 // ————————————————————————————————————————————————————————————————
 
