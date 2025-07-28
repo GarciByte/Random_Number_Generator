@@ -73,11 +73,30 @@
   <!-- Resultado -->
   <div class={styles.resultSection}>
     {#if $lastResult && showResult}
-      <div class={styles.resultBox}>
-        <div class={styles.resultLabel}>Resultado:</div>
-        <div class={styles.resultValue}>
-          {$lastResult.join(", ")}
+      <div class={styles.resultContainer}>
+        <div class={styles.resultLabel}>
+          Resultado{$lastResult.length > 1 ? "s" : ""}:
         </div>
+
+        {#if $generationType === "single" || $lastResult.length === 1}
+          <!-- Mostrar número único -->
+          <div class={styles.resultBox}>
+            <div class={styles.resultValue}>
+              {$lastResult[0]}
+            </div>
+          </div>
+        {:else}
+          <!-- Mostrar múltiples números -->
+          <div class={styles.multipleResults}>
+            {#each $lastResult as number, index}
+              <div class={styles.resultBoxMultiple}>
+                <div class={styles.resultValue}>
+                  {number}
+                </div>
+              </div>
+            {/each}
+          </div>
+        {/if}
       </div>
     {/if}
   </div>

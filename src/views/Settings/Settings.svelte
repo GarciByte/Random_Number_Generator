@@ -52,6 +52,26 @@
   </div>
 
   <form class={styles.form} on:submit|preventDefault={onSave}>
+    <!-- Botón Guardar -->
+    <div class={styles.topSaveSection}>
+      <button
+        type="submit"
+        class={`${styles.saveBtn} ${isSaving ? styles.saving : ""}`}
+        disabled={$invalidRange ||
+          $invalidRangeTooBig ||
+          $invalidRepeat ||
+          $invalidEmpty ||
+          isSaving}
+      >
+        {#if isSaving}
+          <div class={styles.spinner}></div>
+          <span>Guardando...</span>
+        {:else}
+          <i class="bi-save"></i>
+          <span>Guardar Configuración</span>
+        {/if}
+      </button>
+    </div>
     <!-- Sección de Rango -->
     <div class={styles.section}>
       <h3 class={styles.sectionTitle}>📊 Rango de Números</h3>
@@ -191,27 +211,6 @@
           </div>
         </label>
       </div>
-    </div>
-
-    <!-- Botón Guardar -->
-    <div class={styles.saveSection}>
-      <button
-        type="submit"
-        class={`${styles.saveBtn} ${isSaving ? styles.saving : ""}`}
-        disabled={$invalidRange ||
-          $invalidRangeTooBig ||
-          $invalidRepeat ||
-          $invalidEmpty ||
-          isSaving}
-      >
-        {#if isSaving}
-          <div class={styles.spinner}></div>
-          <span>Guardando...</span>
-        {:else}
-          <i class="bi-save"></i>
-          <span>Guardar Configuración</span>
-        {/if}
-      </button>
     </div>
   </form>
 </div>
