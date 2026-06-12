@@ -1,4 +1,4 @@
-# Generador de números aleatorios
+# Random Number Generator
 
 Aplicación de escritorio para Windows que genera números aleatorios de forma flexible y rápida. Desarrollada con Electron, Svelte y TypeScript.
 
